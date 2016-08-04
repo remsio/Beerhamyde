@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Beerhamyde</string>
+    <string name="number_player">PLAYER NAME :</string>
+    <string name="add_player">ADD A PLAYER</string>
+</resources>
