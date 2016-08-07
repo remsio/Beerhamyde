@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,56 +29,50 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ListPlayer.nbPlayer = 0;
+        ListPlayer.listPlayer = new ArrayList<String>();
 
-        int random = (int) (1 + (Math.random()) * (5-1));
 
-        final TextView dbbTest = (TextView)findViewById(R.id.bddTest);
+        final ArrayList<String> playerList = new ArrayList<String>();
+        Button bt = (Button) findViewById(R.id.add_player);
+        ListView lv = (ListView) findViewById(R.id.player_list);
+        final ArrayAdapter<String> adapter= new ArrayAdapter<String>(this, R.layout.adapter_template, playerList);
+        lv.setAdapter(adapter);
 
-        // Fetch the FirebaseDatabase connection
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        assert bt != null;
+        bt.setOnClickListener(new View.OnClickListener() {
 
-        // Enable DEBUG information in the log
-        database.setLogLevel(Logger.Level.DEBUG);
+            public void onClick(View view) {
 
-        // Get a reference to the information
-        final DatabaseReference appBeerhamyde = database.getReference("beerhamyde").child("" + random);
+                ListPlayer.nbPlayer ++;
 
-        // Fetch data from the reference once
-        appBeerhamyde.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Fetch the value from the snapshot of the data, as an Integer
+                EditText et = (EditText) findViewById(R.id.editText);
+                String msg;
+                msg = et.getText().toString();
+                playerList.add(ListPlayer.nbPlayer+":"+msg);
+                adapter.notifyDataSetChanged();
 
-                String value =(String) dataSnapshot.getValue();
-
-                dbbTest.setText(value);
-                dbbTest.invalidate();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Not implemented
+                et.setText("");
             }
         });
 
+       // final TextView dbbTest = (TextView)findViewById(R.id.bddTest);
 
-        dbbTest.setText(appBeerhamyde.toString());
-        dbbTest.invalidate();
+        //Action action = new Action();
 
 
-    }
 
-    public void chosePlayerLayout(View view){
-
-        EditText editText = (EditText)findViewById(R.id.editText);
-
-        String message = editText.getText().toString();
-
-        Intent intent = new Intent(this, PlayerChoser.class);
-        intent.putExtra(CHANGE_TEXT, message);
-        startActivity(intent);
+        //dbbTest.setText(action.getAction());
+        //dbbTest.invalidate();
 
 
     }
+
+    public void startGame(View view) {
+
+        Intent intent = new Intent(this, LayoutGameActivity.class);
+
+    }
+
 
 }

@@ -8,21 +8,16 @@ import java.util.ArrayList;
  */
 public class ListPlayer {
 
-    private ArrayList<Player> listPlayer;
+    public static ArrayList<String> listPlayer;
+    public static int nbPlayer = 0;
 
 
-    public ListPlayer(ArrayList<Player> listPlayer){
-
-        this.listPlayer = listPlayer;
-
-
-    }
-
-    public ArrayList<Player> getListPlayer(){
+    public ArrayList<String> getListPlayer(){
 
         return this.listPlayer;
 
     }
+
 
 
 }
