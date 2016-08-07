@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "625827151836",
+    "firebase_url": "https://beeramide.firebaseio.com",
+    "project_id": "beeramide",
+    "storage_bucket": "beeramide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625827151836:android:f62e673b64eda499",
+        "android_client_info": {
+          "package_name": "exercice.matasse.beerhamyde"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625827151836-l4p2rml3jfh7ea71l0cjs7rlaoa198qn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiICB0EObfVbqQKU5cjdImUuvGaOzmYxc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
