@@ -3,4 +3,5 @@
     <string name="number_player">PLAYER NAME :</string>
     <string name="add_player">ADD A PLAYER</string>
     <string name="validate">VALIDATE</string>
+    <string name="next">NEXT</string>
 </resources>

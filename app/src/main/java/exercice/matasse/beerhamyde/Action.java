@@ -16,6 +16,10 @@ public class Action {
 
     private String textShowed;
 
+    private String type;
+
+    public static int lastId = 0;
+
     public Action(String textShowed){
 
         this.textShowed = textShowed;
@@ -23,54 +27,41 @@ public class Action {
     }
 
     public Action(){
-
-        this.textShowed = this.getRandomDataBaseSentance();
-
-    }
-
-    public String getAction(){
-
-        return this.textShowed;
+        this.type = this.getSentanceType();
 
     }
 
+    public void getAction(ValueEventListener valueEventListener, FirebaseDatabase database){
+        getRandomDataBaseSentance(valueEventListener, database);
+    }
 
-    public String getRandomDataBaseSentance(){
+
+    public void getRandomDataBaseSentance(ValueEventListener eventListener, FirebaseDatabase database){
+
+        int random;
+
+        do{
+           random = (int) (1 + (Math.random()) * (5-1));
+        }while (Action.lastId == random);
+        Action.lastId = random;
 
 
-        int random = (int) (1 + (Math.random()) * (5-1));
-
-        // Fetch the FirebaseDatabase connection
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        // Enable DEBUG information in the log
-        database.setLogLevel(Logger.Level.DEBUG);
 
         // Get a reference to the information
         final DatabaseReference appBeerhamyde = database.getReference("beerhamyde").child("" + random);
 
         // Fetch data from the reference once
-        appBeerhamyde.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Fetch the value from the snapshot of the data, as an Integer
+        appBeerhamyde.addListenerForSingleValueEvent(eventListener);
 
-                String value =(String) dataSnapshot.getValue();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Not implemented
-            }
-        });
-
-
-
-        return appBeerhamyde.toString();
 
     }
 
+
+    public String getSentanceType(){
+
+        return "CHALLENGE";
+
+    }
 
 
 

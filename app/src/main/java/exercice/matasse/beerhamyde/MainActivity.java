@@ -24,6 +24,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     public final static String CHANGE_TEXT = "com.example.matasse.beerhamyde.CHANGE_TEXT";
+    public FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ListPlayer.nbPlayer = 0;
         ListPlayer.listPlayer = new ArrayList<String>();
-
+        database.setLogLevel(Logger.Level.DEBUG);
 
         final ArrayList<String> playerList = new ArrayList<String>();
         Button bt = (Button) findViewById(R.id.add_player);
@@ -56,21 +57,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       // final TextView dbbTest = (TextView)findViewById(R.id.bddTest);
-
-        //Action action = new Action();
-
-
-
-        //dbbTest.setText(action.getAction());
-        //dbbTest.invalidate();
-
 
     }
 
     public void startGame(View view) {
 
-        Intent intent = new Intent(this, LayoutGameActivity.class);
+
+        setContentView(R.layout.game_layout);
+
+        changeTextShowed(database);
+
+
+        Button button = (Button) findViewById(R.id.new_sentance);
+        button.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                changeTextShowed(database);
+            }
+        });
+
+
+
+
+
+
+    }
+
+    public void changeTextShowed(FirebaseDatabase database){
+
+        Action action = new Action();
+        final TextView dbbTest = (TextView)findViewById(R.id.bddTest);
+
+        action.getAction(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dbbTest.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dbbTest.setText("ERROR: CONNEXION CANCELLED");
+            }
+        }, database);
+        dbbTest.invalidate();
+
+
 
     }
 

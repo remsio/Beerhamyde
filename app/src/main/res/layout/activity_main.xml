@@ -45,17 +45,6 @@
 
     </ListView>
 
-    <exercice.matasse.beerhamyde.TextViewCustomer
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
-        android:textSize="50dp"
-        android:text=""
-        android:textColor="@color/White"
-        android:id="@+id/bddTest"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="match_parent"
@@ -76,7 +65,7 @@
         android:background="@drawable/button_style"
         android:text="@string/validate"
         style="@style/button_text"
-
+        android:onClick="startGame"
         android:id="@+id/next"
 
         android:layout_alignParentBottom="true"

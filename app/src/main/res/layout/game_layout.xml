@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/Black"
+    >
+
+
+    <exercice.matasse.beerhamyde.TextViewCustomer
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="73dp"
+        android:textSize="50dp"
+        android:text=""
+        android:textColor="@color/White"
+        android:id="@+id/bddTest"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="@string/next"
+        style="@style/button_text"
+        android:id="@+id/new_sentance" />
 
 </RelativeLayout>
